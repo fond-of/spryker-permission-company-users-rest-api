@@ -2,6 +2,7 @@
 
 namespace FondOfSpryker\Glue\PermissionCompanyUsersRestApi\Processor\Expander;
 
+use ArrayObject;
 use FondOfSpryker\Glue\PermissionCompanyUsersRestApi\PermissionCompanyUsersRestApiConfig;
 use Generated\Shared\Transfer\CompanyUserTransfer;
 use Generated\Shared\Transfer\RestPermissionsAttributesTransfer;
@@ -76,7 +77,7 @@ class PermissionCompanyUsersResourceRelationshipExpander implements PermissionCo
      *
      * @return \ArrayObject|\Generated\Shared\Transfer\PermissionTransfer[]
      */
-    protected function findPermissionsForCompanyUser(int $idCompanyUser, \ArrayObject $roles): \ArrayObject
+    protected function findPermissionsForCompanyUser(int $idCompanyUser, ArrayObject $roles): ArrayObject
     {
         foreach ($roles as $roleTransfer) {
             $rolesCompanyUsers = $roleTransfer->getCompanyUserCollection()->getCompanyUsers();
@@ -101,7 +102,7 @@ class PermissionCompanyUsersResourceRelationshipExpander implements PermissionCo
      *
      * @return bool
      */
-    protected function hasCompanyUserRole(int $idCompanyUser, \ArrayObject $rolesCompanyUsers): bool
+    protected function hasCompanyUserRole(int $idCompanyUser, ArrayObject $rolesCompanyUsers): bool
     {
         foreach ($rolesCompanyUsers as $companyUserTransfer) {
             if ($companyUserTransfer->getIdCompanyUser() == $idCompanyUser) {
