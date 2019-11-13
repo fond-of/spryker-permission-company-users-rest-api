@@ -93,7 +93,7 @@ class PermissionCompanyUsersResourceRelationshipExpander implements PermissionCo
             return $roleTransfer->getPermissionCollection()->getPermissions();
         }
 
-        return [];
+        return new ArrayObject();
     }
 
     /**
