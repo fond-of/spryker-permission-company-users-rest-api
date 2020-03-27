@@ -9,7 +9,7 @@ use Spryker\Glue\Kernel\AbstractFactory;
 class PermissionCompanyUsersRestApiFactory extends AbstractFactory
 {
     /**
-     * @return \FondOfSpryker\Glue\PersmissionCompanyUsersRestApi\Processor\Expander\PermissionCompanyUsersResourceRelationshipExpanderInterface
+     * @return \FondOfSpryker\Glue\PermissionCompanyUsersRestApi\Processor\Expander\PermissionCompanyUsersResourceRelationshipExpanderInterface
      */
     public function createPermissionCompanyUsersResourceRelationshipExpander(): PermissionCompanyUsersResourceRelationshipExpanderInterface
     {

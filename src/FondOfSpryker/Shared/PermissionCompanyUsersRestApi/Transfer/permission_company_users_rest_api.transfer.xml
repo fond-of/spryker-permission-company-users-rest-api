@@ -7,4 +7,26 @@
         <property name="key" type="string"/>
     </transfer>
 
+    <transfer name="CompanyUser">
+        <property name="companyRoleCollection" type="CompanyRoleCollection" />
+        <property name="idCompanyUser" type="int"/>
+    </transfer>
+
+    <transfer name="CompanyRoleCollection">
+        <property name="roles" type="CompanyRole[]" />
+    </transfer>
+
+    <transfer name="CompanyRole">
+        <property name="companyUserCollection" type="CompanyUserCollection" />
+        <property name="permissionCollection" type="PermissionCollection" />
+    </transfer>
+
+    <transfer name="PermissionCollection">
+        <property name="permissions" type="Permission[]" />
+    </transfer>
+
+    <transfer name="CompanyUserCollection">
+        <property name="companyUsers" type="CompanyUser[]" />
+    </transfer>
+
 </transfers>
