@@ -5,7 +5,6 @@ namespace FondOfSpryker\Glue\PermissionCompanyUsersRestApi\Processor\Expander;
 use ArrayObject;
 use FondOfSpryker\Glue\PermissionCompanyUsersRestApi\PermissionCompanyUsersRestApiConfig;
 use Generated\Shared\Transfer\CompanyUserTransfer;
-use Generated\Shared\Transfer\RestPermissionsAttributesTransfer;
 use Generated\Shared\Transfer\RestPermissionsResponseAttributesTransfer;
 use Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceBuilderInterface;
 use Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequestInterface;
@@ -105,7 +104,7 @@ class PermissionCompanyUsersResourceRelationshipExpander implements PermissionCo
     protected function hasCompanyUserRole(int $idCompanyUser, ArrayObject $rolesCompanyUsers): bool
     {
         foreach ($rolesCompanyUsers as $companyUserTransfer) {
-            if ($companyUserTransfer->getIdCompanyUser() == $idCompanyUser) {
+            if ($companyUserTransfer->getIdCompanyUser() === $idCompanyUser) {
                 return true;
             }
         }
