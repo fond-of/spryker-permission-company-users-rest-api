@@ -44,8 +44,30 @@ class PermissionCompanyUsersResourceRelationshipPluginTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->permissionCompanyUsersResourceRelationshipPlugin = new PermissionCompanyUsersResourceRelationshipPlugin();
-        $this->permissionCompanyUsersResourceRelationshipPlugin->setFactory($this->permissionCompanyUsersRestApiFactoryMock);
+        $this->permissionCompanyUsersResourceRelationshipPlugin = new class (
+            $this->permissionCompanyUsersRestApiFactoryMock
+        ) extends PermissionCompanyUsersResourceRelationshipPlugin {
+            /**
+             * @var \FondOfSpryker\Glue\PermissionCompanyUsersRestApi\PermissionCompanyUsersRestApiFactory
+             */
+            protected $permissionCompanyUsersRestApiFactory;
+
+            /**
+             * @param \FondOfSpryker\Glue\PermissionCompanyUsersRestApi\PermissionCompanyUsersRestApiFactory $permissionCompanyUsersRestApiFactory
+             */
+            public function __construct(PermissionCompanyUsersRestApiFactory $permissionCompanyUsersRestApiFactory)
+            {
+                $this->permissionCompanyUsersRestApiFactory = $permissionCompanyUsersRestApiFactory;
+            }
+
+            /**
+             * @return \FondOfSpryker\Glue\PermissionCompanyUsersRestApi\PermissionCompanyUsersRestApiFactory
+             */
+            public function getFactory(): PermissionCompanyUsersRestApiFactory
+            {
+                return $this->permissionCompanyUsersRestApiFactory;
+            }
+        };
     }
 
     /**
