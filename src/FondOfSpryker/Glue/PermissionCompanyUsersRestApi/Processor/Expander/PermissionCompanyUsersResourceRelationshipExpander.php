@@ -47,10 +47,6 @@ class PermissionCompanyUsersResourceRelationshipExpander implements PermissionCo
 
             $roles = $companyRoleCollectionTransfer->getRoles();
 
-            if ($roles === null) {
-                continue;
-            }
-
             $permissions = $this->findPermissionsForCompanyUser($payload->getIdCompanyUser(), $roles);
 
             foreach ($permissions as $permissionTransfer) {
@@ -79,17 +75,25 @@ class PermissionCompanyUsersResourceRelationshipExpander implements PermissionCo
     protected function findPermissionsForCompanyUser(int $idCompanyUser, ArrayObject $roles): ArrayObject
     {
         foreach ($roles as $roleTransfer) {
-            $rolesCompanyUsers = $roleTransfer->getCompanyUserCollection()->getCompanyUsers();
+            $companyUserCollectionTransfer = $roleTransfer->getCompanyUserCollection();
 
-            if ($rolesCompanyUsers === null) {
+            if ($companyUserCollectionTransfer === null) {
                 continue;
             }
 
-            if (!$this->hasCompanyUserRole($idCompanyUser, $rolesCompanyUsers)) {
+            $companyUserTransfers = $companyUserCollectionTransfer->getCompanyUsers();
+
+            if (!$this->hasCompanyUserRole($idCompanyUser, $companyUserTransfers)) {
                 continue;
             }
 
-            return $roleTransfer->getPermissionCollection()->getPermissions();
+            $permissionCollection = $roleTransfer->getPermissionCollection();
+
+            if ($permissionCollection === null) {
+                continue;
+            }
+
+            return $permissionCollection->getPermissions();
         }
 
         return new ArrayObject();

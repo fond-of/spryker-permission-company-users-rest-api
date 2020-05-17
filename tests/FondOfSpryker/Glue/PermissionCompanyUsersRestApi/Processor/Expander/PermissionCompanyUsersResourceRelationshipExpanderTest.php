@@ -225,41 +225,7 @@ class PermissionCompanyUsersResourceRelationshipExpanderTest extends Unit
     /**
      * @return void
      */
-    public function testAddResourceRelationshipsPayloadNull(): void
-    {
-        $this->restResourceInterfaceMock->expects($this->atLeastOnce())
-            ->method('getPayload')
-            ->willReturn(null);
-
-        $this->permissionCompanyUsersResourceRelationshipExpander->addResourceRelationships(
-            $this->resources,
-            $this->restRequestInterfaceMock
-        );
-    }
-
-    /**
-     * @return void
-     */
-    public function testAddResourceRelationshipsCompanyRoleCollectionNull(): void
-    {
-        $this->restResourceInterfaceMock->expects($this->atLeastOnce())
-            ->method('getPayload')
-            ->willReturn($this->companyUserTransferMock);
-
-        $this->companyUserTransferMock->expects($this->atLeastOnce())
-            ->method('getCompanyRoleCollection')
-            ->willReturn(null);
-
-        $this->permissionCompanyUsersResourceRelationshipExpander->addResourceRelationships(
-            $this->resources,
-            $this->restRequestInterfaceMock
-        );
-    }
-
-    /**
-     * @return void
-     */
-    public function testAddResourceRelationshipsRolesNull(): void
+    public function testAddResourceRelationshipsWithPermissionCollectionIsNull(): void
     {
         $this->restResourceInterfaceMock->expects($this->atLeastOnce())
             ->method('getPayload')
@@ -271,6 +237,56 @@ class PermissionCompanyUsersResourceRelationshipExpanderTest extends Unit
 
         $this->companyRoleCollectionTransferMock->expects($this->atLeastOnce())
             ->method('getRoles')
+            ->willReturn($this->roles);
+
+        $this->companyUserTransferMock->expects($this->atLeastOnce())
+            ->method('getIdCompanyUser')
+            ->willReturn($this->idCompanyUser);
+
+        $this->companyRoleTransferMock->expects($this->atLeastOnce())
+            ->method('getCompanyUserCollection')
+            ->willReturn($this->companyUserCollectionTransferMock);
+
+        $this->companyUserCollectionTransferMock->expects($this->atLeastOnce())
+            ->method('getCompanyUsers')
+            ->willReturn($this->companyUsers);
+
+        $this->companyRoleTransferMock->expects($this->atLeastOnce())
+            ->method('getPermissionCollection')
+            ->willReturn(null);
+
+        $this->permissionCompanyUsersResourceRelationshipExpander->addResourceRelationships(
+            $this->resources,
+            $this->restRequestInterfaceMock
+        );
+    }
+
+    /**
+     * @return void
+     */
+    public function testAddResourceRelationshipsWithPayloadIsNull(): void
+    {
+        $this->restResourceInterfaceMock->expects($this->atLeastOnce())
+            ->method('getPayload')
+            ->willReturn(null);
+
+        $this->permissionCompanyUsersResourceRelationshipExpander->addResourceRelationships(
+            $this->resources,
+            $this->restRequestInterfaceMock
+        );
+    }
+
+    /**
+     * @return void
+     */
+    public function testAddResourceRelationshipsWithCompanyRoleCollectionIsNull(): void
+    {
+        $this->restResourceInterfaceMock->expects($this->atLeastOnce())
+            ->method('getPayload')
+            ->willReturn($this->companyUserTransferMock);
+
+        $this->companyUserTransferMock->expects($this->atLeastOnce())
+            ->method('getCompanyRoleCollection')
             ->willReturn(null);
 
         $this->permissionCompanyUsersResourceRelationshipExpander->addResourceRelationships(
@@ -302,10 +318,6 @@ class PermissionCompanyUsersResourceRelationshipExpanderTest extends Unit
 
         $this->companyRoleTransferMock->expects($this->atLeastOnce())
             ->method('getCompanyUserCollection')
-            ->willReturn($this->companyUserCollectionTransferMock);
-
-        $this->companyUserCollectionTransferMock->expects($this->atLeastOnce())
-            ->method('getCompanyUsers')
             ->willReturn(null);
 
         $this->permissionCompanyUsersResourceRelationshipExpander->addResourceRelationships(
@@ -317,7 +329,7 @@ class PermissionCompanyUsersResourceRelationshipExpanderTest extends Unit
     /**
      * @return void
      */
-    public function testAddResourceRelationshipsCompanyUserIdNotMatch(): void
+    public function testAddResourceRelationshipsWithWrongCompanyUserId(): void
     {
         $this->restResourceInterfaceMock->expects($this->atLeastOnce())
             ->method('getPayload')
