@@ -6,6 +6,7 @@ use Codeception\Test\Unit;
 use FondOfSpryker\Glue\PermissionCompanyUsersRestApi\PermissionCompanyUsersRestApiConfig;
 use FondOfSpryker\Glue\PermissionCompanyUsersRestApi\PermissionCompanyUsersRestApiFactory;
 use Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequestInterface;
+use Spryker\Glue\Kernel\AbstractFactory;
 
 class PermissionCompanyUsersResourceRelationshipPluginTest extends Unit
 {
@@ -61,9 +62,9 @@ class PermissionCompanyUsersResourceRelationshipPluginTest extends Unit
             }
 
             /**
-             * @return \FondOfSpryker\Glue\PermissionCompanyUsersRestApi\PermissionCompanyUsersRestApiFactory
+             * @return \Spryker\Glue\Kernel\AbstractFactory
              */
-            public function getFactory(): PermissionCompanyUsersRestApiFactory
+            protected function getFactory(): AbstractFactory
             {
                 return $this->permissionCompanyUsersRestApiFactory;
             }
